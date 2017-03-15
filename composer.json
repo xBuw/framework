@@ -1,0 +1,17 @@
+{
+  "name": "xbuw/framework",
+  "description": "framework",
+  "minimum-stability": "dev",
+  "license": "free",
+  "authors": [
+    {
+      "name": "xBuw",
+      "email": "kirichenko_s@bk.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "xbuw\\framework\\": "src/"
+    }
+  }
+}
