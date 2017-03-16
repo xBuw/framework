@@ -38,39 +38,6 @@ class Router
     }
 
     /**
-     * Get current route
-     *
-     * @param Request $request
-     * @return Route
-     */
-    public function getRoute(Request $request): Route
-    {
-        $method = $request->getMethod();
-        $uri = $request->getUri();
-        $route = new Route();
-
-        foreach ($this->routes as $key => $value) {
-            if($value["method"] == $method){
-
-
-                echo '-------------------<pre>';
-                print_r($value);
-                echo "$uri</br>";
-                echo '-------------------</pre>';
-
-                if(preg_match_all("'".$value["regexp"]."'",$uri)) {
-                    echo 2;
-                    $route->name = $key;
-                    $route->controller = $value["controller_name"];
-                    $route->method = $value["controller_method"];
-                    $route->params = $value["variables"];
-                }
-            }
-        }
-        return $route;
-    }
-
-    /**
      * Return all variables
      *
      * @param array $config
@@ -108,5 +75,31 @@ class Router
 
         return "^" . $result . "$";
 
+    }
+
+    /**
+     * Get current route
+     *
+     * @param Request $request
+     * @return Route
+     */
+    public function getRoute(Request $request): Route
+    {
+        $method = $request->getMethod();
+        $uri = $request->getUri();
+        $route = new Route();
+
+        foreach ($this->routes as $key => $value) {
+            if ($value["method"] == $method) {
+
+                if (preg_match_all("'" . $value["regexp"] . "'", $uri, $params)) {
+                    $route->name = $key;
+                    $route->controller = $value["controller_name"];
+                    $route->method = $value["controller_method"];
+                    $route->params = $params;
+                }
+            }
+        }
+        return $route;
     }
 }
