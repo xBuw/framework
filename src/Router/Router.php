@@ -11,9 +11,14 @@ namespace xbuw\framework\Router;
 
 class Router
 {
+
     const DEFAULT_REGEXP = "[^\/]+";
     private $routes = [];
 
+    /**
+     * Router constructor.
+     * @param array $config
+     */
     public function __construct(array $config)
     {
         foreach ($config as $key => $value) {
@@ -31,12 +36,25 @@ class Router
         echo '</pre>';
     }
 
+    /**
+     * Return all variables
+     *
+     * @param array $config
+     * @return array
+     */
     private function getExistedVariables(array $config): array
     {
         preg_match_all("/{.+}/U", $config["pattern"], $variables);
         return $variables[0];
     }
 
+    /**
+     * Create final regexp for config
+     *
+     * @param array $config_route
+     * @param array $existed_variables
+     * @return string
+     */
     private function getRegexpFromRoute(array $config_route, array $existed_variables): string
     {
         $pattern = $config_route["pattern"];
