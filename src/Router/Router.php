@@ -92,10 +92,11 @@ class Router
         foreach ($this->routes as $key => $value) {
             if ($value["method"] == $method) {
 
-                if (preg_match_all("'" . $value["regexp"] . "'", $uri, $params)) {
+                if (preg_match("'" . $value["regexp"] . "'", $uri, $params)) {
                     $route->name = $key;
                     $route->controller = $value["controller_name"];
                     $route->method = $value["controller_method"];
+                    unset($params[0]);
                     $route->params = $params;
                 }
             }

@@ -20,7 +20,8 @@ class Request
      */
     public function getUri(): String
     {
-        return $_SERVER["REQUEST_URI"];
+        return "/product/10/params/var";
+        //return $_SERVER["REQUEST_URI"];
     }
 
     public static function getMethod(): string

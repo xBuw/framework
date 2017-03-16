@@ -39,6 +39,6 @@ class Application
         echo '<pre>';
         print_r($route);
         echo '</pre>';
-
+        
     }
 }
