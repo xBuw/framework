@@ -9,6 +9,7 @@
 namespace xbuw\framework;
 
 use xbuw\framework\Request\Request;
+use xbuw\framework\Router\Router;
 
 class Application
 {
@@ -18,10 +19,14 @@ class Application
     public function run()
     {
         $request = Request::getRequest();
-        $uri = $request->getUri();
-        $method = $request->getMethod();
+        $ini_array = parse_ini_file(dirname(__FILE__)."/../config/routes.ini",true);
+        
+        echo '<pre>';
+        print_r($ini_array);
+        echo '</pre>';
+        
+        $router = new Router($ini_array);
 
-        echo "$uri</br>$method</br>";
     }
 
     /**
@@ -29,6 +34,6 @@ class Application
      */
     function __construct()
     {
-        echo "hello application!!!</br>";
+        echo "application constructor!!!</br>";
     }
 }
