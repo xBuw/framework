@@ -32,9 +32,6 @@ class Router
                 "variables" => $existed_variables
             ];
         }
-        echo '<pre>';
-        print_r($this->routes);
-        echo '</pre>';
     }
 
     /**

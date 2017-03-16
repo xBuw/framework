@@ -11,4 +11,4 @@ $loader = require 'vendor/autoload.php';
 
 $page = new Application();
 $page->run();
-echo "hi from shop index</br>";
+echo "hi from fram index</br>";

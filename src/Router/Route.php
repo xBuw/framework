@@ -15,15 +15,39 @@ class Route
      */
     public $name;
     /**
-     * @var Controller name
+     * @var string controller name
      */
     public $controller;
     /**
-     * @var Method name
+     * @var string method name
      */
     public $method;
     /**
      * @var array Parsed params
      */
     public $params = [];
+
+    /**
+     * @return string
+     */
+    public function getController():string
+    {
+        return $this->controller;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod():string
+    {
+        return $this->method;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParams():array
+    {
+        return $this->params;
+    }
 }
