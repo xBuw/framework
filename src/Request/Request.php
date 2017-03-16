@@ -24,7 +24,7 @@ class Request
         //return $_SERVER["REQUEST_URI"];
     }
 
-    public static function getMethod(): string
+    public static function getMethod()
     {
         return $_SERVER["REQUEST_METHOD"];
     }

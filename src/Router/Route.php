@@ -30,7 +30,7 @@ class Route
     /**
      * @return string
      */
-    public function getController():string
+    public function getController()
     {
         return $this->controller;
     }
@@ -38,7 +38,7 @@ class Route
     /**
      * @return string
      */
-    public function getMethod():string
+    public function getMethod()
     {
         return $this->method;
     }
