@@ -9,9 +9,10 @@
 namespace xbuw\framework\Router;
 
 
+use xbuw\framework\Request\Request;
+
 class Router
 {
-
     const DEFAULT_REGEXP = "[^\/]+";
     private $routes = [];
 
@@ -34,6 +35,39 @@ class Router
         echo '<pre>';
         print_r($this->routes);
         echo '</pre>';
+    }
+
+    /**
+     * Get current route
+     *
+     * @param Request $request
+     * @return Route
+     */
+    public function getRoute(Request $request): Route
+    {
+        $method = $request->getMethod();
+        $uri = $request->getUri();
+        $route = new Route();
+
+        foreach ($this->routes as $key => $value) {
+            if($value["method"] == $method){
+
+
+                echo '-------------------<pre>';
+                print_r($value);
+                echo "$uri</br>";
+                echo '-------------------</pre>';
+
+                if(preg_match_all("'".$value["regexp"]."'",$uri)) {
+                    echo 2;
+                    $route->name = $key;
+                    $route->controller = $value["controller_name"];
+                    $route->method = $value["controller_method"];
+                    $route->params = $value["variables"];
+                }
+            }
+        }
+        return $route;
     }
 
     /**

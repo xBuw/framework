@@ -34,6 +34,11 @@ class Application
         echo '</pre>';
 
         $router = new Router($ini_array);
+        $route = $router->getRoute($request);
+
+        echo '<pre>';
+        print_r($route);
+        echo '</pre>';
 
     }
 }
