@@ -44,10 +44,10 @@ class Router
 
         for ($i = 0; $i < count($existed_variables); $i++) {
 
-            $currentVariable = substr($existed_variables[$i], 1, strlen($existed_variables[$i])-2);
-            if(array_key_exists($currentVariable, $config_route["variables"])){
-                $var_reg = "(" . $config_route["variables"][$currentVariable]  . ")";
-            }else {
+            $currentVariable = substr($existed_variables[$i], 1, strlen($existed_variables[$i]) - 2);
+            if (array_key_exists($currentVariable, $config_route["variables"])) {
+                $var_reg = "(" . $config_route["variables"][$currentVariable] . ")";
+            } else {
                 $var_reg = "(" . self::DEFAULT_REGEXP . ")";
             }
 
