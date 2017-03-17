@@ -11,6 +11,13 @@ namespace xbuw\framework\Renderer;
 
 class Renderer
 {
+    /**
+     * Render page
+     * 
+     * @param string $path_to_view
+     * @param array $params
+     * @return string
+     */
     public static function render(string $path_to_view, array $params = []): string
     {
         ob_start();

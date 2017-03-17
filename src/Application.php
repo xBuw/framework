@@ -19,10 +19,11 @@ class Application
 
     /**
      * Application constructor.
+     * @param $config
      */
-    function __construct()
+    function __construct($config)
     {
-        $this->config = parse_ini_file(dirname(__FILE__) . "/../config/routes.ini", true);
+        $this->config = $config;
     }
 
     /**
