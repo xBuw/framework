@@ -8,10 +8,8 @@
 
 namespace xbuw\framework\Request;
 
-
 class Request
 {
-
     private static $request = null;
 
     /**
@@ -21,7 +19,7 @@ class Request
     {
     }
 
-    public static function getMethod()
+    public static function getMethod(): string
     {
         return $_SERVER["REQUEST_METHOD"];
     }
@@ -41,7 +39,7 @@ class Request
      * get current URI
      * @return String
      */
-    public function getUri(): String
+    public function getUri(): string
     {
         return $_SERVER["REQUEST_URI"];
     }

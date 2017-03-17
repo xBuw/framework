@@ -8,7 +8,6 @@
 
 namespace xbuw\framework\Renderer;
 
-
 class Renderer
 {
     /**

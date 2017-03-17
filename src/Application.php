@@ -19,9 +19,9 @@ class Application
 
     /**
      * Application constructor.
-     * @param $config
+     * @param array $config
      */
-    function __construct($config)
+    function __construct(array $config)
     {
         $this->config = $config;
     }
@@ -31,12 +31,12 @@ class Application
      */
     public function run()
     {
-
         $router = new Router($this->config);
-
         $route = $router->getRoute(Request::getRequest());
+
         $route_controller = $route->getController();
         $route_method = $route->getMethod();
+
         if (class_exists($route_controller)) {
             $reflectionClass = new \ReflectionClass($route_controller);
             if ($reflectionClass->hasMethod($route_method)) {
@@ -48,10 +48,5 @@ class Application
                 }
             }
         }
-
-        echo '<pre>';
-        print_r($route);
-        echo '</pre>';
-
     }
 }

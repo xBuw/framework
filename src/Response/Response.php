@@ -8,7 +8,6 @@
 
 namespace xbuw\framework\Response;
 
-
 class Response
 {
     public $codeAnswer;

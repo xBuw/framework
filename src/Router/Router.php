@@ -8,7 +8,6 @@
 
 namespace xbuw\framework\Router;
 
-
 use xbuw\framework\Request\Request;
 
 class Router

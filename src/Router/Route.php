@@ -11,7 +11,7 @@ namespace xbuw\framework\Router;
 class Route
 {
     /**
-     * @var Route name
+     * @var string Route name
      */
     public $name;
     /**
@@ -30,7 +30,7 @@ class Route
     /**
      * @return string
      */
-    public function getController()
+    public function getController():string
     {
         return $this->controller;
     }
@@ -38,7 +38,7 @@ class Route
     /**
      * @return string
      */
-    public function getMethod()
+    public function getMethod():string
     {
         return $this->method;
     }
