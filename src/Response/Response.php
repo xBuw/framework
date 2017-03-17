@@ -13,20 +13,32 @@ class Response
 {
     public $codeAnswer;
     protected $headers = [];
-    protected $playload = '';
+    protected $content = '';
 
+    /**
+     * Response constructor.
+     * @param $content
+     * @param int $code
+     */
     public function __construct($content, $code = 200)
     {
         $this->codeAnswer = $code;
-        $this->playload = $content;
+        $this->content = $content;
         $this->addHeader('Content-Type', 'text/html');
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function addHeader($key, $value)
     {
         $this->headers[$key] = $value;
     }
 
+    /**
+     * Send response
+     */
     public function send()
     {
         $this->sendHeaders();
@@ -34,6 +46,9 @@ class Response
         exit();
     }
 
+    /**
+     * Form headers, and send them.
+     */
     public function sendHeaders()
     {
         header($_SERVER['SERVER_PROTOCOL'] . " " . $this->codeAnswer);
@@ -43,9 +58,12 @@ class Response
             }
         }
     }
-    
+
+    /**
+     * Display content.
+     */
     public function sendBody()
     {
-        echo $this->playload;
+        echo $this->content;
     }
 }

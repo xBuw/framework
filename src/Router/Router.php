@@ -23,14 +23,16 @@ class Router
     public function __construct(array $config)
     {
         foreach ($config as $key => $value) {
-            $existed_variables = $this->getExistedVariables($value);
-            $this->routes[$key] = [
-                "method" => isset($value["method"]) ? $value["method"] : "GET",
-                "controller_name" => explode('@', $value["action"], 2)[0],
-                "controller_method" => explode('@', $value["action"], 2)[1],
-                "regexp" => $this->getRegexpFromRoute($value, $existed_variables),
-                "variables" => $existed_variables
-            ];
+            if (key_exists("action", $value) and key_exists("pattern", $value)) {
+                $existed_variables = $this->getExistedVariables($value);
+                $this->routes[$key] = [
+                    "method" => isset($value["method"]) ? $value["method"] : "GET",
+                    "controller_name" => explode('@', $value["action"], 2)[0],
+                    "controller_method" => explode('@', $value["action"], 2)[1],
+                    "regexp" => $this->getRegexpFromRoute($value, $existed_variables),
+                    "variables" => $existed_variables
+                ];
+            }
         }
     }
 

@@ -13,7 +13,7 @@ class Renderer
 {
     /**
      * Render page
-     * 
+     *
      * @param string $path_to_view
      * @param array $params
      * @return string

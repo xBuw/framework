@@ -15,25 +15,15 @@ class Request
     private static $request = null;
 
     /**
-     * get current URI
-     * @return String
+     * Request constructor
      */
-    public function getUri(): String
+    public function __construct()
     {
-        return "/product/10/params/var";
-        //return $_SERVER["REQUEST_URI"];
     }
 
     public static function getMethod()
     {
         return $_SERVER["REQUEST_METHOD"];
-    }
-
-    /**
-     * Request constructor
-     */
-    public function __construct()
-    {
     }
 
     /**Return request
@@ -45,6 +35,15 @@ class Request
             self::$request = new self();
         }
         return self::$request;
+    }
+
+    /**
+     * get current URI
+     * @return String
+     */
+    public function getUri(): String
+    {
+        return $_SERVER["REQUEST_URI"];
     }
 
 }
