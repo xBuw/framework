@@ -12,6 +12,12 @@ use xbuw\framework\Request\Request;
 use xbuw\framework\Response\Response;
 use xbuw\framework\Router\Router;
 
+/**
+ * Single entry point
+ *
+ * Class Application
+ * @package xbuw\framework
+ */
 class Application
 {
 
@@ -36,7 +42,7 @@ class Application
 
         $route_controller = $route->getController();
         $route_method = $route->getMethod();
-
+        //remember
         if (class_exists($route_controller)) {
             $reflectionClass = new \ReflectionClass($route_controller);
             if ($reflectionClass->hasMethod($route_method)) {

@@ -8,6 +8,10 @@
 
 namespace xbuw\framework\Request;
 
+/**
+ * Class Request
+ * @package xbuw\framework\Request
+ */
 class Request
 {
     private static $request = null;
@@ -19,6 +23,10 @@ class Request
     {
     }
 
+    /**
+     * Get request method
+     * @return string
+     */
     public static function getMethod(): string
     {
         return $_SERVER["REQUEST_METHOD"];
