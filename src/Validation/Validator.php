@@ -49,12 +49,11 @@ class Validator
 
                 $validation_class = new self::$known_rules[$rule_key];
 
-                //$field_value = isset($this->object->$field_name) ? $this->object->$field_name : null;
-                $field_value = $this->object;
+                $field_value = !isset($this->object->$field_name) ? $this->object->$field_name : null;
 
                 if(!$validation_class->check($field_name,$field_value,$rule_params)){
                     $result = false;
-                    $this->errors[$field_name] = $validation_class->getError(
+                    $this->errors[$field_name."-".$field_rule] = $validation_class->getError(
                         $field_name, $field_value, $rule_params
                     );
                 }
