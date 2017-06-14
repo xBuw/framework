@@ -89,13 +89,16 @@ class Router
 
         foreach ($this->routes as $key => $value) {
             if ($value["method"] == $method) {
-
                 if (preg_match("'" . $value["regexp"] . "'", $uri, $params)) {
                     $route->name = $key;
                     $route->controller = $value["controller_name"];
                     $route->method = $value["controller_method"];
                     unset($params[0]);
                     $route->params = $params;
+                    for($i=0 ; $i<sizeof($params) ; $i++){
+                        $innerKey = substr($value["variables"][$i],1,-1);
+                        $request->$innerKey = $params[$i+1];
+                    }
                 }
             }
         }
