@@ -16,6 +16,15 @@ class Request
 {
     private static $request = null;
 
+    private $container = array();
+    function __set($name, $value){
+        $this->container[$name] = $value;
+    }
+    function __get($name)
+    {
+        return isset($this->container[$name])?$this->container[$name]:null;
+    }
+
     /**
      * Request constructor
      */
