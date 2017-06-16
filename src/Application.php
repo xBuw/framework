@@ -8,6 +8,7 @@
 
 namespace xbuw\framework;
 
+use xbuw\framework\Middleware\Middleware;
 use xbuw\framework\Request\Request;
 use xbuw\framework\Response\Response;
 use xbuw\framework\Router\Router;
@@ -20,16 +21,21 @@ use xbuw\framework\Router\Router;
  */
 class Application
 {
-
-    public $config = [];
+    private $routes = [];
+    private $middleware = [];
+    private $routeMiddleware = [];
 
     /**
      * Application constructor.
-     * @param array $config
+     * @param array $routes
+     * @param array $middleware
+     * @param array $routeMiddleware
      */
-    function __construct(array $config)
+    function __construct(array $routes, array $middleware, array $routeMiddleware)
     {
-        $this->config = $config;
+        $this->routes = $routes;
+        $this->middleware = $middleware;
+        $this->routeMiddleware = $routeMiddleware;
     }
 
     /**
@@ -37,22 +43,25 @@ class Application
      */
     public function run()
     {
-        $router = new Router($this->config);
-        $route = $router->getRoute(Request::getRequest());
+        $request = Request::getRequest();
+        $router = new Router($this->routes);
+        $route = $router->getRoute($request);
 
         $route_controller = $route->getController();
         $route_method = $route->getMethod();
-        //remember
-        if (class_exists($route_controller)) {
-            $reflectionClass = new \ReflectionClass($route_controller);
-            if ($reflectionClass->hasMethod($route_method)) {
-                $controller = $reflectionClass->newInstance();
-                $reflectionMethod = $reflectionClass->getMethod($route_method);
-                $response = $reflectionMethod->invokeArgs($controller, $route->getParams());
-                if ($response instanceof Response) {
-                    $response->send();
-                }
+
+        $listMiddleware = [];
+        foreach ($this->middleware as $key => $value){
+            if($route_controller."@".$route_method == $key){
+                $listMiddleware = $value;
             }
+        }
+
+        $middleware = new Middleware($listMiddleware, $this->routeMiddleware);
+        $response = $middleware->run($request);
+
+        if ($response instanceof Response) {
+            $response->send();
         }
     }
 }
