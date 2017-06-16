@@ -4,7 +4,8 @@ namespace xbuw\framework\Injector;
 
 class Injector
 {
-    protected static $config = [];
+
+    private static $config = [];
 
     /**
      * Set config
@@ -19,10 +20,11 @@ class Injector
      * Simple DI
      * Only construct with parameters
      * @param $class_name
+     * @param $params
      * @return object
      * @throws \Exception
      */
-    public static function make($class_name)
+    public static function make($class_name, $params = [])
     {
         try {
             $reflectionClass = new \ReflectionClass(self::$config[$class_name]);
@@ -31,6 +33,8 @@ class Injector
         }
         $reflectionMethod = $reflectionClass->getConstructor();
         $rParams = $reflectionMethod->getParameters();
+        $rArgs = [];
+
         for ($i = 0; $i < count($rParams); $i++) {
             $rType = $rParams[$i]->getType();
             foreach (self::$config as $key => $value) {
@@ -38,12 +42,12 @@ class Injector
                     $temp = new \ReflectionClass($value);
                     try {
                         $rArgs[$i] = $temp->newInstance();
-                    } catch (\Exception $e){
+                    } catch (\Exception $e) {
                         throw new \Exception($e->getMessage());
                     }
                 }
             }
         }
-        return $reflectionClass->newInstanceArgs($rArgs);
+        return $reflectionClass->newInstance(array_merge($params, $rArgs));
     }
 }
