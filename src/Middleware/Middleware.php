@@ -15,6 +15,7 @@ class Middleware
 {
     private $config;
     private $list;
+
     /**
      * Middleware constructor.
      * @param array $config
@@ -31,7 +32,8 @@ class Middleware
      * @param Request $request
      * @return Response
      */
-    public function run(Request $request):Response{
+    public function run(Request $request): Response
+    {
         $tempMiddleware = new LastMiddleware();
         $tempClosure = function () use ($tempMiddleware) {
             return $tempMiddleware->handle();

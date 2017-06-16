@@ -21,6 +21,6 @@ class NumericValidationRule extends AbstractValidationRule
 
     public function getError(string $field_name, $field_value, array $params): string
     {
-        return "$field_name field must be numeric but it is ".$field_value;
+        return "$field_name field must be numeric but it is " . $field_value;
     }
 }

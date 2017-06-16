@@ -95,9 +95,9 @@ class Router
                     $route->method = $value["controller_method"];
                     unset($params[0]);
                     $route->params = $params;
-                    for($i=0 ; $i<sizeof($params) ; $i++){
-                        $innerKey = substr($value["variables"][$i],1,-1);
-                        $request->$innerKey = $params[$i+1];
+                    for ($i = 0; $i < sizeof($params); $i++) {
+                        $innerKey = substr($value["variables"][$i], 1, -1);
+                        $request->$innerKey = $params[$i + 1];
                     }
                 }
             }

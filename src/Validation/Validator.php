@@ -12,10 +12,10 @@ namespace xbuw\framework\Validation;
 class Validator
 {
     private $object;
-    private $rules =[];
-    private $errors =[];
+    private $rules = [];
+    private $errors = [];
 
-    private static $known_rules =[
+    private static $known_rules = [
         'min' => 'xbuw\framework\Validation\Rules\MinValidationRule',
         'numeric' => 'xbuw\framework\Validation\Rules\NumericValidationRule'
     ];
@@ -37,13 +37,13 @@ class Validator
                 $exploded_rule = explode(":", $field_rule);
                 $rule_key = $exploded_rule[0];
 
-                if(!array_key_exists($rule_key, self::$known_rules)){
+                if (!array_key_exists($rule_key, self::$known_rules)) {
                     //exception
                     continue;
                 }
 
                 $rule_params = [];
-                if(count($exploded_rule) > 1){
+                if (count($exploded_rule) > 1) {
                     $rule_params = explode(",", $exploded_rule[1]);
                 }
 
@@ -51,9 +51,9 @@ class Validator
 
                 $field_value = !isset($this->object->$field_name) ? $this->object->$field_name : null;
 
-                if(!$validation_class->check($field_name,$field_value,$rule_params)){
+                if (!$validation_class->check($field_name, $field_value, $rule_params)) {
                     $result = false;
-                    $this->errors[$field_name."-".$field_rule] = $validation_class->getError(
+                    $this->errors[$field_name . "-" . $field_rule] = $validation_class->getError(
                         $field_name, $field_value, $rule_params
                     );
                 }
@@ -69,7 +69,7 @@ class Validator
 
     public static function addValidationRule(string $key, string $class_namespace): bool
     {
-        if(class_exists($class_namespace)){
+        if (class_exists($class_namespace)) {
             self::$known_rules[$key] = $class_namespace;
             return true;
         }

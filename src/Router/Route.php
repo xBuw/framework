@@ -7,7 +7,10 @@
  */
 
 namespace xbuw\framework\Router;
-
+/**
+ * Class Route Singleton
+ * @package xbuw\framework\Router
+ */
 class Route
 {
     private static $route = null;
@@ -26,6 +29,7 @@ class Route
         }
         return self::$route;
     }
+
     /**
      * @var string Route name
      */

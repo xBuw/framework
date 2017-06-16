@@ -13,7 +13,8 @@ abstract class AbstractValidationRule
 {
     abstract function check(string $field_name, $field_value, array $params): bool;
 
-    public function getError(string $field_name, $field_value, array $params): string{
+    public function getError(string $field_name, $field_value, array $params): string
+    {
         return "$field_name - error";
     }
 }

@@ -21,6 +21,6 @@ class MinValidationRule extends AbstractValidationRule
 
     public function getError(string $field_name, $field_value, array $params): string
     {
-        return "$field_name field must be greather than ".$params[0];
+        return "$field_name field must be greather than " . $params[0];
     }
 }

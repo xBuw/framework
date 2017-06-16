@@ -11,12 +11,12 @@ class LastMiddleware
      * Call Controller
      * @return Response
      */
-    public function handle():Response{
+    public function handle(): Response
+    {
         $route = Route::getRoute();
         $route_controller = $route->getController();
         $route_method = $route->getMethod();
         $response = null;
-
         if (class_exists($route_controller)) {
             $reflectionClass = new \ReflectionClass($route_controller);
             if ($reflectionClass->hasMethod($route_method)) {

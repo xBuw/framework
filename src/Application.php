@@ -51,12 +51,11 @@ class Application
         $route_method = $route->getMethod();
 
         $listMiddleware = [];
-        foreach ($this->middleware as $key => $value){
-            if($route_controller."@".$route_method == $key){
+        foreach ($this->middleware as $key => $value) {
+            if ($route_controller . "@" . $route_method == $key) {
                 $listMiddleware = $value;
             }
         }
-
         $middleware = new Middleware($listMiddleware, $this->routeMiddleware);
         $response = $middleware->run($request);
 
