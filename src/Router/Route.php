@@ -10,6 +10,22 @@ namespace xbuw\framework\Router;
 
 class Route
 {
+    private static $route = null;
+
+    public function __construct()
+    {
+    }
+
+    /**
+     * @return Route
+     */
+    public static function getRoute(): self
+    {
+        if (!self::$route) {
+            self::$route = new self();
+        }
+        return self::$route;
+    }
     /**
      * @var string Route name
      */
@@ -22,15 +38,11 @@ class Route
      * @var string method name
      */
     public $method;
-    /**
-     * @var array Parsed params
-     */
-    public $params = [];
 
     /**
      * @return string
      */
-    public function getController():string
+    public function getController(): string
     {
         return $this->controller;
     }
@@ -38,16 +50,8 @@ class Route
     /**
      * @return string
      */
-    public function getMethod():string
+    public function getMethod(): string
     {
         return $this->method;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParams():array
-    {
-        return $this->params;
     }
 }

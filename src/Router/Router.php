@@ -85,7 +85,7 @@ class Router
     {
         $method = $request->getMethod();
         $uri = $request->getUri();
-        $route = new Route();
+        $route = Route::getRoute();
 
         foreach ($this->routes as $key => $value) {
             if ($value["method"] == $method) {
